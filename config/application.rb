@@ -31,5 +31,8 @@ module Bikesantiago
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.x.city_bikes.base_url = "http://api.citybik.es/v2"
+    config.x.city_bikes.network = "bikesantiago"
   end
 end
