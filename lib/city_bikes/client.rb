@@ -1,6 +1,6 @@
 require 'httparty'
 
-module CityBike
+module CityBikes
   class NotFoundError < StandardError; end
   class ApiError < StandardError; end
 
