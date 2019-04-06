@@ -1,7 +1,6 @@
 require 'httparty'
 
 module CityBikes
-  class NotFoundError < StandardError; end
   class ApiError < StandardError; end
 
   class Client
@@ -26,18 +25,18 @@ module CityBikes
     end
 
     def get(entity, query=nil)
-      response = HTTParty.get(network_url, query: query || {})
+      response = HTTParty.get(network_url, follow_redirects: true, query: query || {})
       parse_response(response)
     end
 
     def parse_response(response)
       case response.code
-      when 200
-        JSON.parse(response.body)
-      when 404
-        raise NotFoundError
-      else
-        raise ApiError
+      when 200..299
+        JSON.parse(response.body) if response.body
+      when 400..499
+        raise ApiError.new("#{response.code} when trying to connect to #{network_url}")
+      when 500..599
+        raise ApiError.new("#{response.code} when trying to connect to #{network_url}")
       end
     end
   end

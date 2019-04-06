@@ -41,10 +41,10 @@ describe CityBikes::Client do
 
       let(:not_found_url) { "http://api.citybik.es/v2/networks/foo" }
 
-      it "raises a NotFoundError exception" do
+      it "raises an ApiError" do
         stub_request(:get, not_found_url).to_return(status: 404)
 
-        expect { client.list_stations }.to raise_error(CityBikes::NotFoundError)
+        expect { client.list_stations }.to raise_error(CityBikes::ApiError)
       end
     end
   end
