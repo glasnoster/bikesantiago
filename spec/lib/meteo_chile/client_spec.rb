@@ -1,5 +1,6 @@
 require 'meteo_chile/client'
 require 'webmock/rspec'
+require 'rgeo-geojson'
 
 describe MeteoChile::Client do
   let(:base_url) { "http://geonode.meteochile.gob.cl/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Adivision_comunal_geo_ide_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature" }
@@ -23,12 +24,11 @@ describe MeteoChile::Client do
       expect(a_request(:get, expected_url)).to have_been_made.once
     end
 
-    it "returns an array of comunas" do
+    it "returns a FeatureCollection" do
       stub_request(:get, expected_url).to_return(body: mock_result)
 
       result = client.list_comunas
-      expect(result).to be_a(Array)
-      expect(result[0].keys).to include("type")
+      expect(result).to be_a(RGeo::GeoJSON::FeatureCollection)
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'httparty'
+require 'rgeo-geojson'
 
 module MeteoChile
   class ApiError < StandardError; end
@@ -13,9 +14,7 @@ module MeteoChile
     end
 
     def list_comunas
-      result = get(base_url)
-
-      result["features"]
+      get(base_url)
     end
 
     private
@@ -27,7 +26,7 @@ module MeteoChile
     def parse_response(response)
       case response.code
       when 200..299
-        JSON.parse(response.body) if response.body
+        RGeo::GeoJSON.decode(response.body) if response.body
       when 400..499
         raise ApiError.new("#{response.code} when trying to connect to #{base_url}")
       when 500..599
