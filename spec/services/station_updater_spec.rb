@@ -1,6 +1,6 @@
 require 'webmock/rspec'
 
-describe CityBikes::Client do
+describe StationUpdater do
   let(:base_url) { "http://api.citybik.es/v2" }
   let(:network)  { "bikesantiago" }
   let(:client) { CityBikes::Client.new(base_url, network) }
