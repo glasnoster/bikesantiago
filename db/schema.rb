@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_233306) do
+ActiveRecord::Schema.define(version: 2019_04_06_143702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "stations", force: :cascade do |t|
     t.string "name"
@@ -21,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_233306) do
     t.string "citybikes_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
   end
 
 end

@@ -22,6 +22,20 @@ describe CityBikes::Client do
       it "creates the stations" do
         expect { subject.update_stations! }.to change { Station.count }.by(2)
       end
+
+      it "correctly sets the station name" do
+        allow(Station).to receive(:create)
+        subject.update_stations!
+
+        expect(Station).to have_received(:create).with(hash_including(name: "Municipalidad de Vitacura"))
+      end
+
+      it "correctly sets the station location" do
+        allow(Station).to receive(:create)
+        subject.update_stations!
+
+        expect(Station).to have_received(:create).with(hash_including(location: "POINT(-70.6007646 -33.3980103)"))
+      end
     end
 
     context "when a station is already in the database" do

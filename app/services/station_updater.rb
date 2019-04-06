@@ -32,8 +32,17 @@ class StationUpdater
 
   def create_station(station_hash)
     Station.create(
-      name: station_hash["name"],
-      citybikes_id: station_hash["id"])
+      citybikes_id: station_hash["id"],
+      name:         format_name(station_hash["name"]),
+      location:     format_location(station_hash["longitude"], station_hash["latitude"]))
+  end
+
+  def format_name(name)
+    name.split(' - ')[1]
+  end
+
+  def format_location(lng, lat)
+    "POINT(#{lng} #{lat})"
   end
 
 end
