@@ -1,0 +1,4 @@
+UpdateStationsJob:
+  queue: "default"
+  cron:  "* * * * *"
+  class: "UpdateStationsJob"
