@@ -33,5 +33,13 @@ describe ComunaCreator do
     it "only inserts comunas in RM" do
       expect { subject.create_comunas! }.to change{ Comuna.count }.by(1)
     end
+
+    it "correctly inserts comunas" do
+      subject.create_comunas!
+
+      comuna = Comuna.first
+      expect(comuna.name).to eq("Providencia")
+    end
+
   end
 end

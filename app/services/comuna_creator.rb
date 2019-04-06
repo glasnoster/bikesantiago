@@ -16,8 +16,8 @@ class ComunaCreator
   def create_comunas!
     comunas = client.list_comunas
     comunas.each do |comuna|
-      comuna_name = comuna.property("NOM_REG")
-      next if comuna_name != RM
+      next if comuna.property("NOM_REG") != RM
+      comuna_name = comuna.property("NOM_COM")
       create_comuna(comuna_name, comuna.geometry)
     end
   end

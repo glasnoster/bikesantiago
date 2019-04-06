@@ -32,8 +32,8 @@
       "type": "Feature",
         "properties": {
           "NOM_REG": "Región Metropolitana de Santiago",
-          "NOM_PROV": "Malleco",
-          "NOM_COM": "Ercilla",
+          "NOM_PROV": "-",
+          "NOM_COM": "Providencia",
           "SHAPE_LENG": 170675.595438,
           "DIS_ELEC": 48,
           "CIR_SENA": 14,
