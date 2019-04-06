@@ -1,0 +1,1 @@
+json.array! @stations, :id, :name
