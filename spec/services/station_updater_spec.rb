@@ -36,6 +36,20 @@ describe StationUpdater do
 
         expect(Station).to have_received(:create).with(hash_including(location: "POINT(-70.6007646 -33.3980103)"))
       end
+
+      context "when a comuna for the station exists" do
+        let(:vitacura) { create(:vitacura, name: "Vitacura") }
+
+        it "links the comuna to the station" do
+          vitacura
+
+          allow(Station).to receive(:create)
+          subject.update_stations!
+
+          expect(Station).to have_received(:create).with(hash_including(comuna: vitacura))
+        end
+
+      end
     end
 
     context "when a station is already in the database" do

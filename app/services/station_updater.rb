@@ -31,10 +31,15 @@ class StationUpdater
   end
 
   def create_station(station_hash)
-    Station.create(
+    lon = station_hash["longitude"]
+    lat = station_hash["latitude"]
+
+    comuna = Comuna.containing_point(longitude: lon, latitude: lat).first
+    station = Station.create(
       citybikes_id: station_hash["id"],
       name:         format_name(station_hash["name"]),
-      location:     format_location(station_hash["longitude"], station_hash["latitude"]))
+      location:     format_location(lon, lat),
+      comuna:       comuna)
   end
 
   def format_name(name)
