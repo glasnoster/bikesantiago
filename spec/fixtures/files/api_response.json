@@ -1,0 +1,38 @@
+{
+  "network": {
+    "stations": [
+      {
+      "empty_slots": 9,
+      "extra": {
+        "address": "V35 - Municipalidad de Vitacura",
+        "last_updated": 1554425453,
+        "renting": 1,
+        "returning": 1,
+        "uid": "56"
+        },
+      "free_bikes": 6,
+      "id": "67d54f4e5ba728b426b6543eb38ba49a",
+      "latitude": -33.3980103,
+      "longitude": -70.6007646,
+      "name": "V35 - Municipalidad de Vitacura",
+      "timestamp": "2019-04-05T00:51:05.590000Z"
+      },
+      {
+        "empty_slots": 7,
+        "extra": {
+          "address": "S25 - Plaza de Armas",
+          "last_updated": 1554425460,
+          "renting": 1,
+          "returning": 1,
+          "uid": "77"
+        },
+        "free_bikes": 8,
+        "id": "2fccf0c72966d33e41a70bc38d539a3c",
+        "latitude": -33.4367061,
+        "longitude": -70.6498287,
+        "name": "S25 - Plaza de Armas",
+        "timestamp": "2019-04-05T00:51:05.887000Z"
+      }
+    ]
+  }
+}
