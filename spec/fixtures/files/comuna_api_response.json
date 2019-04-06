@@ -1,5 +1,58 @@
 {
   "type":"FeatureCollection",
   "totalFeatures":346,
-  "features":[{"type": "Feature"}]
+  "features":[
+    {
+        "type": "Feature",
+        "properties": {
+          "NOM_REG": "Región de La Araucanía",
+          "NOM_PROV": "Malleco",
+          "NOM_COM": "Ercilla",
+          "SHAPE_LENG": 170675.595438,
+          "DIS_ELEC": 48,
+          "CIR_SENA": 14,
+          "COD_COMUNA": 9204,
+          "SHAPE_Le_1": 170675.595706,
+          "SHAPE_Area": 497902482.309
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+              [
+                  [[40, 40], [20, 45], [45, 30], [40, 40]]
+              ],
+              [
+                  [[20, 35], [10, 30], [10, 10], [30, 5], [45, 20], [20, 35]], 
+                  [[30, 20], [20, 15], [20, 25], [30, 20]]
+              ]
+          ]
+      }
+    },
+    {
+      "type": "Feature",
+        "properties": {
+          "NOM_REG": "Región Metropolitana de Santiago",
+          "NOM_PROV": "Malleco",
+          "NOM_COM": "Ercilla",
+          "SHAPE_LENG": 170675.595438,
+          "DIS_ELEC": 48,
+          "CIR_SENA": 14,
+          "COD_COMUNA": 9204,
+          "SHAPE_Le_1": 170675.595706,
+          "SHAPE_Area": 497902482.309
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+              [
+                  [[40, 40], [20, 45], [45, 30], [40, 40]]
+              ],
+              [
+                  [[20, 35], [10, 30], [10, 10], [30, 5], [45, 20], [20, 35]], 
+                  [[30, 20], [20, 15], [20, 25], [30, 20]]
+              ]
+          ]
+      }
+    }
+  ]
 }
