@@ -34,5 +34,7 @@ module Bikesantiago
 
     config.x.city_bikes.base_url = "http://api.citybik.es/v2"
     config.x.city_bikes.network = "bikesantiago"
+
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end
