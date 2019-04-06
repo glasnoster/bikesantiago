@@ -38,6 +38,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'webmock', '~> 3.5.1'
   gem 'coveralls'
+  gem 'factory_bot_rails'
 end
 
 group :development do
