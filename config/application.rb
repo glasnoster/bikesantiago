@@ -34,6 +34,7 @@ module Bikesantiago
 
     config.x.city_bikes.base_url = "http://api.citybik.es/v2"
     config.x.city_bikes.network = "bikesantiago"
+    config.x.meteo_chile.api_url = "http://geonode.meteochile.gob.cl/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Adivision_comunal_geo_ide_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature"
 
     config.autoload_paths << "#{Rails.root}/lib"
   end
