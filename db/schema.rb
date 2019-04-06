@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_143702) do
+ActiveRecord::Schema.define(version: 2019_04_06_152218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "comunas", force: :cascade do |t|
+    t.string "name"
+    t.geography "bounds", limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
+  end
 
   create_table "stations", force: :cascade do |t|
     t.string "name"
