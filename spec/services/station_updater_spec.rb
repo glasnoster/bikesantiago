@@ -34,7 +34,7 @@ describe StationUpdater do
         allow(Station).to receive(:create)
         subject.update_stations!
 
-        expect(Station).to have_received(:create).with(hash_including(location: "POINT(-70.6007646 -33.3980103)"))
+        expect(Station).to have_received(:create).with(hash_including(location: "POINT(-70.57866096496582 -33.38787959704519)"))
       end
 
       context "when a comuna for the station exists" do
