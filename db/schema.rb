@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_191643) do
+ActiveRecord::Schema.define(version: 2019_04_06_204452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 2019_04_06_191643) do
   create_table "comunas", force: :cascade do |t|
     t.string "name"
     t.geography "bounds", limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "station_logs", force: :cascade do |t|
+    t.datetime "last_update"
+    t.integer "empty_slots"
+    t.integer "free_bikes"
+    t.bigint "station_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["last_update"], name: "index_station_logs_on_last_update"
+    t.index ["station_id"], name: "index_station_logs_on_station_id"
   end
 
   create_table "stations", force: :cascade do |t|

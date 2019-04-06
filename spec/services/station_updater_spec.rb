@@ -62,6 +62,12 @@ describe StationUpdater do
       end
     end
 
+    it "creates a StationLog entry for each log" do
+      expect(StationLog).to receive(:create_log).twice
+
+      subject.update_stations!
+    end
+
     it "logs ApiErrors" do
       message = "test message"
       allow(client).to receive(:list_stations).and_raise(CityBikes::ApiError.new(message))
@@ -69,5 +75,6 @@ describe StationUpdater do
 
       subject.update_stations!
     end
+
   end
 end
