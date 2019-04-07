@@ -20,7 +20,6 @@ class StationUpdater
       stations.each do |station_hash|
         station = find_or_create_station(station_hash)
 
-        # debugger
         log = create_log(station, station_hash)
         update_station(station, log)
       end

@@ -1,6 +1,5 @@
-
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
 
 require 'webmock/rspec'
 require 'factory_bot'
