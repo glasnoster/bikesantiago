@@ -18,9 +18,11 @@ class StationUpdater
     begin
       stations = client.list_stations
       stations.each do |station_hash|
-        station = create_or_update_station(station_hash)
+        station = find_or_create_station(station_hash)
 
-        create_log(station, station_hash)
+        # debugger
+        log = create_log(station, station_hash)
+        update_station(station, log)
       end
     rescue CityBikes::ApiError => e
       Rails.logger.error(e.message)
@@ -28,7 +30,7 @@ class StationUpdater
   end
 
   private
-  def create_or_update_station(station_hash)
+  def find_or_create_station(station_hash)
     find_station(station_hash) || create_station(station_hash)
   end
 
@@ -41,7 +43,7 @@ class StationUpdater
     lat = station_hash["latitude"]
 
     comuna = Comuna.containing_point(longitude: lon, latitude: lat).first
-    station = Station.create(
+    Station.create(
       citybikes_id: station_hash["id"],
       name:         format_name(station_hash["name"]),
       location:     format_location(lon, lat),
@@ -55,6 +57,16 @@ class StationUpdater
       free_bikes:  station_hash["free_bikes"],
       empty_slots: station_hash["empty_slots"]
     })
+  end
+
+  def update_station(station, log)
+    return if station.last_update == log.last_update
+
+    station.free_bikes = log.free_bikes
+    station.empty_slots = log.empty_slots
+    station.last_update = log.last_update
+
+    station.save
   end
 
   def format_name(name)

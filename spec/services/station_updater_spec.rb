@@ -24,49 +24,48 @@ describe StationUpdater do
       end
 
       it "correctly sets the station name" do
-        allow(Station).to receive(:create)
         subject.update_stations!
 
-        expect(Station).to have_received(:create).with(hash_including(name: "Municipalidad de Vitacura"))
+        expect(Station.all.map(&:name)).to include("Municipalidad de Vitacura")
       end
 
       it "correctly sets the station location" do
-        allow(Station).to receive(:create)
         subject.update_stations!
 
-        expect(Station).to have_received(:create).with(hash_including(location: "POINT(-70.57866096496582 -33.38787959704519)"))
+        expect(Station.all.map(&:location).map(&:to_s)).to include("POINT (-70.57866096496582 -33.38787959704519)")
       end
 
       context "when a comuna for the station exists" do
-        let(:vitacura) { create(:vitacura, name: "Vitacura") }
-
         it "links the comuna to the station" do
-          vitacura
-
-          allow(Station).to receive(:create)
+          vitacura = create(:vitacura, name: "Vitacura")
           subject.update_stations!
 
-          expect(Station).to have_received(:create).with(hash_including(comuna: vitacura))
+          expect(Station.all.map(&:comuna)).to include(vitacura)
         end
-
       end
     end
 
     context "when a station is already in the database" do
       let(:existing_station) { stations_list[0] }
+      let(:station_id) { existing_station["id"] }
+
+      before do
+        create(:station, citybikes_id: station_id, name: "S1", free_bikes: 0, empty_slots: 0)
+      end
 
       it "does not create a new entry" do
-        create(:station, citybikes_id: existing_station["id"], name: "S1")
-
         expect { subject.update_stations! }.to change { Station.count }.by(1)
       end
+
+      it { expect { subject.update_stations! }.to change { Station.find_by_citybikes_id(station_id).free_bikes } }
+      it { expect { subject.update_stations! }.to change { Station.find_by_citybikes_id(station_id).empty_slots } }
+      it { expect { subject.update_stations! }.to change { Station.find_by_citybikes_id(station_id).last_update } }
     end
 
     it "creates a StationLog entry for each log" do
-      expect(StationLog).to receive(:create).twice
-
-      subject.update_stations!
+      expect { subject.update_stations! }.to change { StationLog.count }.by(2)
     end
+
 
     it "logs ApiErrors" do
       message = "test message"

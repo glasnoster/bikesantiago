@@ -12,8 +12,8 @@ class StationLog < ApplicationRecord
       .where(updated_at: time_window)
       .select(%{
         DATE_TRUNC('%s', station_logs.created_at) as timestamp,
-        SUM(free_bikes) as total_free_bikes,
-        SUM(empty_slots) as total_empty_slots} % trunc_res)
+        SUM(station_logs.free_bikes) as total_free_bikes,
+        SUM(station_logs.empty_slots) as total_empty_slots} % trunc_res)
       .group("timestamp")
       .order("timestamp")
   end

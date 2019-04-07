@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_204452) do
+ActiveRecord::Schema.define(version: 2019_04_07_185037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 2019_04_06_204452) do
     t.datetime "updated_at", null: false
     t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.bigint "comuna_id"
+    t.datetime "last_update"
+    t.integer "empty_slots"
+    t.integer "free_bikes"
     t.index ["comuna_id"], name: "index_stations_on_comuna_id"
   end
 
