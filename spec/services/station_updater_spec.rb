@@ -63,7 +63,7 @@ describe StationUpdater do
     end
 
     it "creates a StationLog entry for each log" do
-      expect(StationLog).to receive(:create_log).twice
+      expect(StationLog).to receive(:create).twice
 
       subject.update_stations!
     end
